@@ -1,11 +1,237 @@
 <!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
-    <title>UFO 포토헌터</title>
-    <meta name="description" content="밤하늘을 스캔하며 희귀한 UFO를 포착하고 나만의 UFO 도감을 완성하는 반응속도 미니게임" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080d22">
+  <title>UFO Photo Hunter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+    *{box-sizing:border-box}body{margin:0;background:#080d22;color:#f6f5ff;font-family:'Space Grotesk',system-ui,sans-serif}.screen{min-height:100svh}.intro,.results{min-height:100svh;display:flex;flex-direction:column;align-items:center;text-align:center;padding:clamp(36px,8vh,86px) 24px;background:radial-gradient(circle at 50% 34%,#20295a 0,#111936 27%,#080d22 62%);overflow:hidden}.intro:before,.results:before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.55;background-image:radial-gradient(#fff 1px,transparent 1.2px),radial-gradient(#fff 1px,transparent 1.2px);background-size:73px 73px,119px 119px;background-position:12px 26px,48px 68px}.orbit{font-size:50px;line-height:.6;color:#a5baff;filter:drop-shadow(0 0 12px #627eff);margin-bottom:22px}.eyebrow,.label{font:500 10px 'DM Mono',monospace;letter-spacing:.18em;color:#aab5e5}.intro h1,.results h1{font-size:clamp(43px,8vw,82px);letter-spacing:-.075em;line-height:.88;margin:13px 0 28px;position:relative}.intro h1 em{font-style:normal;color:#f2d36c;text-shadow:0 0 25px #e1ad4a}.copy{color:#c3c9e6;line-height:1.7;font-size:15px;position:relative}.how{display:flex;gap:17px;flex-wrap:wrap;justify-content:center;margin:40px 0 30px;color:#b9c2e3;font-size:12px;position:relative}.how span{border:1px solid #3b4675;padding:9px 11px;border-radius:4px;background:#121936aa}.primary{border:0;border-radius:3px;background:#f0d276;color:#171628;padding:15px 23px;font-weight:700;letter-spacing:.03em;box-shadow:0 6px 22px #d9a84833;position:relative;cursor:pointer}.primary span{margin-left:10px;font-size:18px}.game{height:100svh;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden}.hud{display:flex;justify-content:space-between;padding:17px clamp(16px,5vw,70px);background:#0c1229;border-bottom:1px solid #20294c;z-index:2}.hud div{min-width:100px;display:flex;flex-direction:column;gap:2px}.hud .score{text-align:center}.hud .film{text-align:right;align-items:end}.hud b{font-size:20px;letter-spacing:-.04em}.hud small{font:10px 'DM Mono',monospace;color:#8f9ac4}.combo{color:#f4d36e!important}.dot{display:inline-block;width:8px;height:14px;border:1px solid #6572a0;margin-left:3px;border-radius:1px}.dot.full{background:#f1d071;border-color:#f1d071;box-shadow:0 0 7px #f1d07188}.sky{position:relative;overflow:hidden;touch-action:none;cursor:crosshair;background:radial-gradient(ellipse at 50% 64%,#25355e 0,#151c41 31%,#080d22 77%)}.sky:after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(#0000 75%,#050714aa),radial-gradient(ellipse at center,#0000 48%,#02030b99 100%)}.stars{position:absolute;inset:0;opacity:.65;background-image:radial-gradient(#fff 1px,transparent 1.2px),radial-gradient(#b6ccff 1px,transparent 1.4px),radial-gradient(#fff 1px,transparent 1.3px);background-size:75px 75px,129px 129px,191px 191px;background-position:14px 22px,62px 5px,20px 94px}.ufo{position:absolute;z-index:1;transform:translate(-50%,-50%);animation:enter .25s ease-out,hover 1.2s ease-in-out infinite alternate}.ufo.golden{filter:drop-shadow(0 0 12px #ffcc4d)}@keyframes enter{from{opacity:0;transform:translate(-50%,-30%) scale(.6)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}@keyframes hover{to{margin-top:-6px}}.sprite{display:inline-block;width:70px;height:43px;position:relative}.sprite.small{transform:scale(.58);transform-origin:center;margin:-7px 0}.dome{position:absolute;width:31px;height:19px;left:20px;top:3px;border-radius:50% 50% 9px 9px;background:linear-gradient(130deg,#e5f7ff,#76cfff 55%,#4d74c7);border:2px solid #c7eaff}.body{position:absolute;width:68px;height:21px;left:1px;top:19px;border-radius:50%;background:linear-gradient(#d8e4f5,#7185ad 50%,#33456f 52%,#a2b4cf);border:2px solid #dceeff}.golden .body{background:linear-gradient(#fff1ac,#d98d2d 52%,#80501f 55%,#f5c856)}.golden .dome{background:linear-gradient(130deg,#fffde5,#ffe06a 55%,#bd7525)}.light{position:absolute;width:6px;height:4px;border-radius:50%;top:30px;background:#61ffbb;z-index:1;box-shadow:0 0 6px #61ffbb}.golden .light{background:#fff4a5;box-shadow:0 0 6px #fff4a5}.l1{left:16px}.l2{left:32px}.l3{left:49px}.finder{position:absolute;width:112px;height:112px;z-index:3;transform:translate(-50%,-50%);pointer-events:none}.finder i{position:absolute;width:27px;height:27px;border-color:#ecf1ff;border-style:solid}.finder i:nth-child(1){left:0;top:0;border-width:2px 0 0 2px}.finder i:nth-child(2){right:0;top:0;border-width:2px 2px 0 0}.finder i:nth-child(3){left:0;bottom:0;border-width:0 0 2px 2px}.finder i:nth-child(4){right:0;bottom:0;border-width:0 2px 2px 0}.finder b{position:absolute;left:50%;top:50%;width:9px;height:9px;border:1px solid #fff;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 6px #fff}.feedback{position:absolute;z-index:5;left:50%;top:24%;transform:translateX(-50%);display:flex;flex-direction:column;text-align:center;animation:feedback .9s ease-out forwards}.feedback b{font-size:clamp(30px,7vw,54px);letter-spacing:.06em}.feedback span{font:13px 'DM Mono';color:#fff}.PERFECT b{color:#f6da75;text-shadow:0 0 18px #e7b94a}.GOOD b{color:#9de4ff}.OK b{color:#d1d9f5}.MISS b{color:#ff8b91}@keyframes feedback{to{transform:translate(-50%,-22px);opacity:0}}.hint{position:absolute;z-index:3;bottom:20px;left:0;right:0;text-align:center;font-size:11px;color:#b7c1e5;pointer-events:none}.controls{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:115px;padding:11px clamp(18px,6vw,80px);background:#0c1229;border-top:1px solid #20294c;z-index:4}.controls p{font-size:11px;color:#96a1cd}.controls small{text-align:center;color:#b9c4eb;font:10px 'DM Mono';letter-spacing:.13em;grid-column:2}.shutter{width:65px;height:65px;border-radius:50%;border:4px solid #dfe6ff;background:#a8b4dd;padding:5px;box-shadow:0 0 0 4px #58638c,0 4px 15px #0008;grid-column:2;cursor:pointer}.shutter span{display:block;width:100%;height:100%;border-radius:50%;background:#e05d69;border:2px solid #ffb1b7;box-shadow:inset 0 -5px #a63b4a}.shutter:active{transform:translateY(2px);filter:brightness(.85)}.results{padding-top:clamp(35px,6vh,65px)}.results h1{font-size:clamp(35px,6vw,60px);margin:11px 0 20px}.final{display:flex;flex-direction:column;margin-bottom:25px;position:relative}.final span,.final small{font:11px 'DM Mono';letter-spacing:.13em;color:#aab5e5}.final b{font-size:clamp(43px,8vw,70px);color:#f2d36c;letter-spacing:-.06em}.album{width:min(720px,100%);padding:16px;border:1px solid #3a4572;background:#111834d9;position:relative;margin-bottom:23px;text-align:left}.album h2{font:500 11px 'DM Mono';letter-spacing:.12em;color:#b7c2ec;margin:0 0 12px}.album h2 span{color:#f1d071}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;max-height:240px;overflow:auto}.card{min-height:118px;padding:9px 5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:linear-gradient(145deg,#34446e,#18213f);border:1px solid #6275a7;text-align:center}.card.golden{background:linear-gradient(145deg,#725b30,#252034);border-color:#d7ac50}.starscore{font-size:9px;color:#f4d46f}.card b{font-size:10px}.card small{font:8px 'DM Mono';color:#c6d1f0}.empty{text-align:center;color:#a8b2d9;font-size:13px}@media(max-width:580px){.hud{padding:13px 15px}.hud div{min-width:0}.hud b{font-size:17px}.hud small{font-size:8px}.dot{width:5px;height:10px;margin-left:2px}.finder{width:92px;height:92px}.controls{min-height:98px}.controls p{display:none}.shutter{width:58px;height:58px}.hint{bottom:12px;font-size:10px}.grid{grid-template-columns:repeat(3,1fr)}.how{gap:7px;margin-top:27px}.how span{padding:7px;font-size:10px}}
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    const app=document.querySelector('#app');
+    const MAX_FILM=8;
+    const stages=[
+      {target:5,speed:1,golden:0.03,delay:1450},
+      {target:7,speed:1.3,golden:0.06,delay:1250},
+      {target:9,speed:1.7,golden:0.1,delay:1050},
+      {target:11,speed:2.1,golden:0.14,delay:900},
+      {target:14,speed:2.6,golden:0.2,delay:760}
+    ];
+    let state,spawnTimer,cleanTimer,feedbackTimer,id=0;
+    const cfg=()=>stages[Math.min(state.stage-1,stages.length-1)];
+    const sprite=(kind,small=false)=>`<span class="sprite ${kind} ${small?'small':''}"><i class="dome"></i><i class="body"></i><i class="light l1"></i><i class="light l2"></i><i class="light l3"></i></span>`;
+
+    function reset(){
+      clearTimers();
+      state={stage:1,caught:0,score:0,combo:0,film:MAX_FILM,aim:{x:50,y:50},ufos:[],captures:[],feedback:null};
+      renderGame();
+      startSpawning();
+    }
+
+    function clearTimers(){
+      clearInterval(spawnTimer);
+      clearInterval(cleanTimer);
+      clearTimeout(feedbackTimer);
+    }
+
+    function startSpawning(){
+      spawnTimer=setInterval(()=>{
+        const c=cfg(),now=Date.now();
+        state.ufos=[
+          ...state.ufos.filter(x=>x.until>now),
+          {
+            id:++id,
+            kind:Math.random()<c.golden?'golden':'scout',
+            x:12+Math.random()*76,
+            y:16+Math.random()*68,
+            until:now+Math.max(850,2600/c.speed)
+          }
+        ].slice(-3);
+        renderGame();
+      },cfg().delay);
+
+      cleanTimer=setInterval(()=>{
+        state.ufos=state.ufos.filter(x=>x.until>Date.now());
+        renderGame();
+      },180);
+    }
+
+    function intro(){
+      clearTimers();
+      app.innerHTML=`
+        <main class="intro">
+          <div class="orbit">◌</div>
+          <p class="eyebrow">NIGHT SKY ARCHIVES · 2026</p>
+          <h1>UFO <em>PHOTO</em><br>HUNTER</h1>
+          <p class="copy">빠르게 나타나는 미확인 비행체를 포착해<br>나만의 UFO 사진 도감을 완성하세요.</p>
+          <div class="how">
+            <span>① 화면을 드래그해 조준</span>
+            <span>② 셔터를 눌러 촬영</span>
+            <span>③ PERFECT로 필름 절약</span>
+          </div>
+          <button class="primary" id="start">탐사 시작 <span>→</span></button>
+        </main>`;
+      document.querySelector('#start').onclick=reset;
+    }
+
+    function renderGame(){
+      const c=cfg();
+
+      app.innerHTML=`
+        <main class="game">
+          <header class="hud">
+            <div>
+              <span class="label">STAGE</span>
+              <b>${state.stage}</b>
+              <small>${state.caught}/${c.target} 발견</small>
+            </div>
+            <div class="score">
+              <span class="label">SCORE</span>
+              <b>${state.score.toLocaleString()}</b>
+              ${state.combo>1?`<small class="combo">×${state.combo} COMBO</small>`:''}
+            </div>
+            <div class="film">
+              <span class="label">FILM</span>
+              <b>${Array.from({length:8},(_,i)=>`<i class="dot ${i<state.film?'full':''}"></i>`).join('')}</b>
+              <small>${state.film} / 8</small>
+            </div>
+          </header>
+
+          <div class="sky" id="sky">
+            <div class="stars"></div>
+            ${state.ufos.map(u=>`<div class="ufo ${u.kind}" style="left:${u.x}%;top:${u.y}%">${sprite(u.kind)}</div>`).join('')}
+            <div class="finder" style="left:${state.aim.x}%;top:${state.aim.y}%"><i></i><i></i><i></i><i></i><b></b></div>
+            ${state.feedback?`<div class="feedback ${state.feedback.grade}"><b>${state.feedback.grade}</b><span>${state.feedback.score?'+'+state.feedback.score:state.feedback.grade==='MISS'?'UFO를 놓쳤어요':''}</span></div>`:''}
+            <p class="hint">하늘을 드래그하여 UFO를 조준하세요</p>
+          </div>
+
+          <footer class="controls">
+            <p>셔터는 신중하게! MISS 시 필름 2장이 소모됩니다.</p>
+            <button class="shutter" id="shutter" aria-label="UFO 촬영"><span></span></button>
+            <small>SHUTTER</small>
+          </footer>
+        </main>`;
+
+      const sky=document.querySelector('#sky');
+      let down=false;
+
+      const aim=e=>{
+        const r=sky.getBoundingClientRect();
+        state.aim={
+          x:Math.max(0,Math.min(100,(e.clientX-r.left)/r.width*100)),
+          y:Math.max(0,Math.min(100,(e.clientY-r.top)/r.height*100))
+        };
+        renderGame();
+      };
+
+      sky.onpointerdown=e=>{down=true;aim(e)};
+      sky.onpointermove=e=>{if(down)aim(e)};
+      sky.onpointerup=()=>down=false;
+      sky.onpointerleave=()=>down=false;
+      document.querySelector('#shutter').onclick=shoot;
+    }
+
+    function flash(grade,score){
+      state.feedback={grade,score};
+      clearTimeout(feedbackTimer);
+      feedbackTimer=setTimeout(()=>{
+        state.feedback=null;
+        renderGame();
+      },900);
+    }
+
+    function shoot(){
+      if(state.feedback)return;
+
+      let target=state.ufos.reduce(
+        (a,u)=>!a||Math.hypot(u.x-state.aim.x,u.y-state.aim.y)<Math.hypot(a.x-state.aim.x,a.y-state.aim.y)?u:a,
+        null
+      );
+
+      let grade='MISS';
+
+      if(target){
+        const d=Math.hypot(target.x-state.aim.x,target.y-state.aim.y);
+        grade=d<=6?'PERFECT':d<=13?'GOOD':d<=21?'OK':'MISS';
+      }
+
+      if(grade==='MISS'){
+        state.film=Math.max(0,state.film-2);
+        state.combo=0;
+        flash('MISS');
+        renderGame();
+        if(!state.film)setTimeout(results,700);
+        return;
+      }
+
+      const base=grade==='PERFECT'?300:grade==='GOOD'?180:100;
+      const earned=Math.round(base*(target.kind==='golden'?5:1)*(1+Math.min(state.combo,20)*.05));
+
+      state.score+=earned;
+      state.combo++;
+
+      if(grade!=='PERFECT')state.film=Math.max(0,state.film-1);
+
+      state.ufos=state.ufos.filter(u=>u.id!==target.id);
+      state.captures.push({id:target.id,kind:target.kind,grade,score:earned});
+      state.caught++;
+
+      if(state.caught>=cfg().target){
+        state.stage++;
+        state.caught=0;
+        state.film=Math.min(MAX_FILM,state.film+2);
+        clearTimers();
+        startSpawning();
+      }
+
+      flash(grade,earned);
+      renderGame();
+
+      if(!state.film)setTimeout(results,700);
+    }
+
+    function results(){
+      clearTimers();
+      const rare=state.captures.filter(x=>x.kind==='golden').length;
+
+      app.innerHTML=`
+        <main class="results">
+          <p class="eyebrow">MISSION COMPLETE</p>
+          <h1>오늘의 UFO 앨범</h1>
+
+          <section class="final">
+            <span>FINAL SCORE</span>
+            <b>${state.score.toLocaleString()}</b>
+            <small>희귀 UFO ${rare}마리 발견</small>
+          </section>
+
+          <section class="album">
+            <h2>CAPTURED PHOTOS <span>${state.captures.length}</span></h2>
+            ${state.captures.length
+              ? `<div class="grid">${state.captures.map(x=>`
+                  <article class="card ${x.kind}">
+                    <span class="starscore">${x.grade==='PERFECT'?'★★★★★':x.grade==='GOOD'?'★★★★☆':'★★★☆☆'}</span>
+                    ${sprite(x.kind,true)}
+                    <b>${x.kind==='golden'?'Golden Observer':'Scout UFO'}</b>
+                    <small>${x.grade} · +${x.score}</small>
+                  </article>`).join('')}
+                </div>`
+              : '<p class="empty">아직 남긴 사진이 없어요.</p>'
+            }
+          </section>
+
+          <button class="primary" id="again">다시 탐사하기 <span>↻</span></button>
+        </main>`;
+
+      document.querySelector('#again').onclick=reset;
+    }
+
+    intro();
+  </script>
+</body>
+</html>
